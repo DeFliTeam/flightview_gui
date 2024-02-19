@@ -55,8 +55,8 @@ git pull
 ```
 ### Launch GUI 
 ```bash
-  sudo python flightview_gui.py
-
+  sudo python3 flightview_gui.py
+```
 
 ### Using the GUI
 
