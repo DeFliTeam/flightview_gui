@@ -8,7 +8,7 @@ To use this project, follow these steps:
 
 ### Prerequisites
 
-- A Linux system (tested on WarDragon)
+- A Linux system either Linux computer, DragonOS or Pi running Ubuntu
 - Docker Compose
 - Docker installed
 - Git (for cloning the repository)
@@ -16,7 +16,7 @@ To use this project, follow these steps:
 
 ### Set up Docker's apt repository
 
-First, set up Docker's apt repository. These steps are already completed on the WarDragon. Open a terminal and run the following commands:
+First, set up Docker's apt repository.. Open a terminal and run the following commands:
 
 ```bash
 # Add Docker's official GPG key:
@@ -53,6 +53,10 @@ If you have already cloned the repository and want to update it, navigate to the
 ```bash
 git pull
 ```
+### Launch GUI 
+```bash
+  sudo python flightview_gui.py
+
 
 ### Using the GUI
 
