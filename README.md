@@ -1,4 +1,4 @@
-# FlightView GUI
+# FlightView GUI and NodeRed Connector
 
 Welcome to the FlightView GUI repository. This project provides a user-friendly graphical interface to manage and configure Docker-based aircraft-related services, including `tar1090`, `readsb`, and `acarshub`. With this GUI, you can easily adjust basic settings, start and stop services, and enjoy real-time monitoring of ADSB and ACARS data.
 
@@ -88,6 +88,7 @@ After configuring the services, you can access their web interfaces as follows:
 - **ACARS Hub:** [http://localhost](http://localhost)
 - **READSB:** [http://localhost:8080](http://localhost:8080)
 - **tar1090:** [http://localhost:8078](http://localhost:8078)
+- **worldmap** [http://you-ip-address:1880/worldmap](http://localhost:1880/worldmap)
 
 Make sure that you have the required RTL-SDR devices connected and properly recognized by your system for services that use them.
 
@@ -100,9 +101,19 @@ The Docker Compose YAML files in this project pull in the following Docker image
 - [Dump978](https://github.com/sdr-enthusiasts/docker-dump978)
 - [DumpVDL2](https://github.com/sdr-enthusiasts/docker-dumpvdl2)
 - [Tar1090](https://github.com/sdr-enthusiasts/docker-tar1090)
-- [DefliMongoDB](https://github.com/alphafox02/docker-deflimongodb)
+- [DefliInfluxDB](https://github.com/dealcracker/DefliInfluxDB)
 
-Explore these repositories to learn more about each component and contribute to their development.
+Explore these repositories to learn more about each component and contribute to their development. 
+
+### Data Connector 
+
+If you are running a self-build device your Bucket ID and API Key will be provided in your defli-wallet. If you have a DeFli Device your Bucket ID and API Key can be found on the underneath of the device. 
+
+Run this script  
+
+```bash
+sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
+```
 
 ### Troubleshooting
 
