@@ -103,13 +103,20 @@ The Docker Compose YAML files in this project pull in the following Docker image
 - [Tar1090](https://github.com/sdr-enthusiasts/docker-tar1090)
 - [DefliInfluxDB](https://github.com/dealcracker/DefliInfluxDB)
 
-Explore these repositories to learn more about each component and contribute to their development.  
+Explore these repositories to learn more about each component and contribute to their development.   
+
+
+### Troubleshooting
+
+If you encounter issues accessing the web interfaces, check your firewall settings to ensure they allow connections to the specified ports.
+
+Enjoy using the FlightView GUI to effortlessly manage and monitor your aircraft services. If you have any questions or encounter issues, please feel free to open an issue in this repository.
 
 ### Real-Time Passive Radar 
 
 This function is only currently available on DeFli Devices however may extend to self-builds. You are however welcome to test on self-builds. 
 
-Step 1- Install ADSB2 
+**Step 1- Install ADSB2** 
 ```bash
 sudo git clone http://github.com/30hours/blah2 /opt/adsb2dd
 cd /opt/adsb2dd
@@ -117,7 +124,7 @@ sudo docker compose up -d
 ```
 API is available at http://localhost:49155
 
-Step 2- Install Radar 
+**Step 2- Install Radar** 
 
 ```bash
 vim docker-compose.yml
@@ -140,6 +147,141 @@ The radar output is available at http://localhost:49152.
 
 - If the RTL-SDR does not capture data, restart the API service (on the host) using sudo systemctl restart sdrplay.api.
 
+### GNSS  
+
+**Step 1 Install Dependencies** 
+
+```bash
+$ sudo apt-get install build-essential cmake git pkg-config libboost-dev libboost-date-time-dev \
+       libboost-system-dev libboost-filesystem-dev libboost-thread-dev libboost-chrono-dev \
+       libboost-serialization-dev liblog4cpp5-dev \
+       libblas-dev liblapack-dev libarmadillo-dev libgflags-dev libgoogle-glog-dev \
+       libgnutls-openssl-dev libpcap-dev libmatio-dev libpugixml-dev libgtest-dev \
+       libprotobuf-dev protobuf-compiler python3-mako
+```
+
+**Step 2 Clone in to repository** 
+```bash
+$ git clone https://github.com/gnss-sdr/gnss-sdr
+```
+
+**Step 3 Enter Directory, make and add OSMOSDR** 
+```bash
+cd gnss-sdr/
+cd build/
+cmake ..
+cd build/
+cmake -DENABLE_OSMOSDR=ON -DENABLE ..
+cd build/
+make -j4
+```
+
+**Step 4 Create Config File** 
+Create a new folder on your desktop called **GPS** and create a file within it, name it **gnss-rtl.conf** 
+Paste the following configuration 
+
+```bash
+[GNSS-SDR]
+;######### GLOBAL OPTIONS ##################
+GNSS-SDR.internal_fs_sps=2000000
+
+;######### SIGNAL_SOURCE CONFIG ############
+SignalSource.implementation=Osmosdr_Signal_Source
+SignalSource.item_type=gr_complex
+SignalSource.sampling_frequency=2000000
+SignalSource.freq=1575420000
+SignalSource.gain=50
+SignalSource.rf_gain=40
+SignalSource.if_gain=30
+SignalSource.AGC_enabled=true
+SignalSource.samples=0
+SignalSource.repeat=false
+SignalSource.dump=false
+SignalSource.dump_filename=../data/signal_source.dat
+SignalSource.enable_throttle_control=false
+SignalSource.osmosdr_args=rtl1,bias=1     **PLEASE NOTE YOU WILL NEED TO ASSIGN THE CORRECT SDR NUMBER THE DEFAULT IS 1 BUT YOUR SYSTEM MAY ASSIGN A DIFFERENT NUMBER, LEAVE BIAS AS 1** 
+
+;######### SIGNAL_CONDITIONER CONFIG ############
+SignalConditioner.implementation=Signal_Conditioner
+
+DataTypeAdapter.implementation=Pass_Through
+
+;######### INPUT_FILTER CONFIG ############
+InputFilter.implementation=Freq_Xlating_Fir_Filter
+InputFilter.input_item_type=gr_complex
+InputFilter.output_item_type=gr_complex
+InputFilter.taps_item_type=float
+InputFilter.number_of_taps=5
+InputFilter.number_of_bands=2
+InputFilter.band1_begin=0.0
+InputFilter.band1_end=0.85
+InputFilter.band2_begin=0.90
+InputFilter.band2_end=1.0
+InputFilter.ampl1_begin=1.0
+InputFilter.ampl1_end=1.0
+InputFilter.ampl2_begin=0.0
+InputFilter.ampl2_end=0.0
+InputFilter.band1_error=1.0
+InputFilter.band2_error=1.0
+InputFilter.filter_type=bandpass
+InputFilter.grid_density=16
+InputFilter.sampling_frequency=2000000
+InputFilter.IF=14821
+
+######### RESAMPLER CONFIG ############
+Resampler.implementation=Pass_Through
+Resampler.dump=false
+Resampler.item_type=gr_complex
+
+GNSS-SDR.internal_fs_sps=corrected_value
+InputFilter.sampling_frequency=corrected_value
+```
+
+**Step 5 Install** 
+
+```bash
+cd gnss-sdr/build
+sudo make install
+```
+
+**INSERT SDR HERE** 
+
+**Step 6 Run**
+
+```bash
+cd /home/USER/Desktop/GPS/
+gnss-sdr -config_file gnss-rtl.conf
+```
+
+You should now begin to see satellite data messages, a position lock is indicated in green text 
+
+**Run in background** 
+
+To run GNSS continuously as a background executable follow these instructions 
+
+Once you have secured a GPS lock indicated by a green message on the terminal press **ctrl + z** 
+
+then 
+
+```bash
+bg
+```
+
+Alternatively you can run this command in step 6 
+
+
+```bash
+gnss-sdr -config_file gnss-rtl.conf &
+```
+
+**Troubleshooting** 
+
+You must have Bias T turned on 
+You must have assigned the correct number to the RTL-SDR In step 4 Config File
+
+
+
+
 ### Data Connector 
 
 If you are running a self-build device your Bucket ID and API Key will be provided in your defli-wallet. If you have a DeFli Device your Bucket ID and API Key can be found on the underneath of the device. 
@@ -150,11 +292,6 @@ Run this script
 sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
 ```
 
-### Troubleshooting
-
-If you encounter issues accessing the web interfaces, check your firewall settings to ensure they allow connections to the specified ports.
-
-Enjoy using the FlightView GUI to effortlessly manage and monitor your aircraft services. If you have any questions or encounter issues, please feel free to open an issue in this repository.
 
 ### Contributing
 
