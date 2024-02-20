@@ -1,4 +1,4 @@
-# FlightView GUI and NodeRed Connector
+# FlightView GUI and NodeRed Connector (ADSB & ACARS INSTALL)
 
 Welcome to the FlightView GUI repository. This project provides a user-friendly graphical interface to manage and configure Docker-based aircraft-related services, including `tar1090`, `readsb`, and `acarshub`. With this GUI, you can easily adjust basic settings, start and stop services, and enjoy real-time monitoring of ADSB and ACARS data. In addition we provide a an easily deployable docker script for our passive radar function that uses RTL-SDR plus a front end mixer to sample to channels.
 
