@@ -121,6 +121,7 @@ Run this script
 
 ```bash
 sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
+```
 
 
 ## Passive Radar
