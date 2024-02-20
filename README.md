@@ -299,4 +299,11 @@ You must have assigned the correct number to the RTL-SDR In step 4 Config File
 
 ### Contributing
 
-We welcome contributions! If you have feedback, encounter issues, or want to contribute new features, please open an issue or submit a pull request.
+We welcome contributions! If you have feedback, encounter issues, or want to contribute new features, please open an issue or submit a pull request. 
+
+### Thanks to 
+
+@alphafox02 
+@dealcracker 
+@wiedhopf 
+@30hours
