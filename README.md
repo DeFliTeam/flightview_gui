@@ -109,12 +109,31 @@ Explore these repositories to learn more about each component and contribute to 
 
 This function is only currently available on DeFli Devices however may extend to self-builds. You are however welcome to test on self-builds. 
 
+Step 1- Install ADSB2 
+```bash
+sudo git clone http://github.com/30hours/blah2 /opt/adsb2dd
+cd /opt/adsb2dd
+sudo docker compose up -d
+```
+API is available at http://localhost:49155
+
+Step 2- Install Radar 
+
 ```bash
 vim docker-compose.yml
 --- build: .
 +++ image: ghcr.io/30hours/blah2:latest
 sudo docker compose up -d
 ```
+Adjusting the docker file: 
+
+```bash
+sudo nano config/config.yml
+```
+In the section titled "truth" change the following: 
+TAR1090- Change to the location of your aircraft.json file 
+ADSB2DD- Change to 'http://localhost:49155'
+
 The radar output is available at http://localhost:49152. 
 
 ### Troubleshooting 
