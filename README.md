@@ -154,7 +154,7 @@ In the section titled "truth" change the following:
 TAR1090- Change to the location of your aircraft.json file 
 ADSB2DD- Change to 'http://localhost:49155' 
 
-In the first section change your center frequency to the center frequency of your VHF/UHF/FM/DVB-T Antenna
+In the first section change your center frequency to the center frequency of your VHF/UHF/FM/DVB-T Antenna. Note this antenna must be oriented at a known source if directional only (such as FM). If using an omni directional then no orientation required.
 
 The radar output is available at http://localhost:49152. 
 
