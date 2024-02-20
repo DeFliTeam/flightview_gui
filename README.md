@@ -115,7 +115,11 @@ vim docker-compose.yml
 +++ image: ghcr.io/30hours/blah2:latest
 sudo docker compose up -d
 ```
-The radar output is available at http://localhost:49152.
+The radar output is available at http://localhost:49152. 
+
+### Troubleshooting 
+
+- If the RTL-SDR does not capture data, restart the API service (on the host) using sudo systemctl restart sdrplay.api.
 
 ### Data Connector 
 
