@@ -128,7 +128,7 @@ sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInf
  
 This function is only currently available on DeFli Devices however may extend to self-builds. You are however welcome to test on self-builds. 
 
-##Step 1- Install ADSB2
+**Step 1- Install ADSB2**
 
 ```bash
 sudo git clone http://github.com/30hours/blah2 /opt/adsb2dd
