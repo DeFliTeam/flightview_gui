@@ -1,6 +1,6 @@
 # FlightView GUI and NodeRed Connector
 
-Welcome to the FlightView GUI repository. This project provides a user-friendly graphical interface to manage and configure Docker-based aircraft-related services, including `tar1090`, `readsb`, and `acarshub`. With this GUI, you can easily adjust basic settings, start and stop services, and enjoy real-time monitoring of ADSB and ACARS data.
+Welcome to the FlightView GUI repository. This project provides a user-friendly graphical interface to manage and configure Docker-based aircraft-related services, including `tar1090`, `readsb`, and `acarshub`. With this GUI, you can easily adjust basic settings, start and stop services, and enjoy real-time monitoring of ADSB and ACARS data. In addition we provide a an easily deployable docker script for our passive radar function that uses RTL-SDR plus a front end mixer to sample to channels.
 
 ## Getting Started
 
@@ -103,7 +103,19 @@ The Docker Compose YAML files in this project pull in the following Docker image
 - [Tar1090](https://github.com/sdr-enthusiasts/docker-tar1090)
 - [DefliInfluxDB](https://github.com/dealcracker/DefliInfluxDB)
 
-Explore these repositories to learn more about each component and contribute to their development. 
+Explore these repositories to learn more about each component and contribute to their development.  
+
+### Real-Time Passive Radar 
+
+This function is only currently available on DeFli Devices however may extend to self-builds. You are however welcome to test on self-builds. 
+
+```bash
+vim docker-compose.yml
+--- build: .
++++ image: ghcr.io/30hours/blah2:latest
+sudo docker compose up -d
+```
+The radar output is available at http://localhost:49152.
 
 ### Data Connector 
 
