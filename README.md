@@ -1,8 +1,8 @@
-# FlightView GUI and NodeRed Connector (ADSB & ACARS INSTALL)
+# Installation Procedures for DeFli Projects 
 
-Welcome to the FlightView GUI repository. This project provides a user-friendly graphical interface to manage and configure Docker-based aircraft-related services, including `tar1090`, `readsb`, and `acarshub`. With this GUI, you can easily adjust basic settings, start and stop services, and enjoy real-time monitoring of ADSB and ACARS data. In addition we provide a an easily deployable docker script for our passive radar function that uses RTL-SDR plus a front end mixer to sample to channels.
+## Flightview ADSB + ACARS
 
-## Getting Started
+### Getting Started
 
 To use this project, follow these steps:
 
@@ -88,7 +88,7 @@ After configuring the services, you can access their web interfaces as follows:
 - **ACARS Hub:** [http://localhost](http://localhost)
 - **READSB:** [http://localhost:8080](http://localhost:8080)
 - **tar1090:** [http://localhost:8078](http://localhost:8078)
-- **worldmap** [http://you-ip-address:1880/worldmap](http://localhost:1880/worldmap)
+- **worldmap** [http://you-ip-address:1880/worldmap](http://localhost:1880/worldmap) (ONLY AVAILABLE AFTER DATA CONNECTOR)
 
 Make sure that you have the required RTL-SDR devices connected and properly recognized by your system for services that use them.
 
@@ -112,11 +112,23 @@ If you encounter issues accessing the web interfaces, check your firewall settin
 
 Enjoy using the FlightView GUI to effortlessly manage and monitor your aircraft services. If you have any questions or encounter issues, please feel free to open an issue in this repository.
 
-### Real-Time Passive Radar 
 
+## Data Connector 
+
+If you are running a self-build device your Bucket ID and API Key will be provided in your defli-wallet. If you have a DeFli Device your Bucket ID and API Key can be found on the underneath of the device. 
+
+Run this script  
+
+```bash
+sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
+
+
+## Passive Radar
+ 
 This function is only currently available on DeFli Devices however may extend to self-builds. You are however welcome to test on self-builds. 
 
-**Step 1- Install ADSB2** 
+##Step 1- Install ADSB2
+
 ```bash
 sudo git clone http://github.com/30hours/blah2 /opt/adsb2dd
 cd /opt/adsb2dd
@@ -147,7 +159,7 @@ The radar output is available at http://localhost:49152.
 
 - If the RTL-SDR does not capture data, restart the API service (on the host) using sudo systemctl restart sdrplay.api.
 
-### GNSS  
+## GNSS  
 
 **Step 1 Install Dependencies** 
 
@@ -280,17 +292,6 @@ You must have Bias T turned on
 You must have assigned the correct number to the RTL-SDR In step 4 Config File
 
 
-
-
-### Data Connector 
-
-If you are running a self-build device your Bucket ID and API Key will be provided in your defli-wallet. If you have a DeFli Device your Bucket ID and API Key can be found on the underneath of the device. 
-
-Run this script  
-
-```bash
-sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
-```
 
 
 ### Contributing
