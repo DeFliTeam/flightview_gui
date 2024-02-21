@@ -1,10 +1,8 @@
 # Installation Procedures for DeFli Projects 
 
-## Flightview ADSB + ACARS
 
-### Getting Started
 
-To use this project, follow these steps:
+## ADSB & ACARS
 
 ### Prerequisites
 
@@ -12,7 +10,7 @@ To use this project, follow these steps:
 - Docker Compose
 - Docker installed
 - Git (for cloning the repository)
-- One or more RTL-SDR devices (for `readsb`, `acarshub`, and `dump978`)
+- One or more RTL-SDR devices (for `readsb`and`acarshub`) note these must be dedicated SDR's for ADSB and Airband VHF respectively.
 
 ### Set up Docker's apt repository
 
