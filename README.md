@@ -184,7 +184,7 @@ cd gnss-sdr/
 cd build/
 cmake ..
 cd build/
-cmake -DENABLE_OSMOSDR=ON -DENABLE ..
+cmake -DENABLE_OSMOSDR=ON ..
 cd build/
 make -j4
 ```
