@@ -292,9 +292,61 @@ gnss-sdr -config_file gnss-rtl.conf &
 **Troubleshooting** 
 
 You must have Bias T turned on 
-You must have assigned the correct number to the RTL-SDR In step 4 Config File
+You must have assigned the correct number to the RTL-SDR In step 4 Config File 
 
+## WiFi Scanning Drones 
 
+To perform this function you will need a wireless adapter, we recommend the Panda PAU09 USB Adapter 
+
+**Step 1 Clone Into Repository** 
+
+```bash
+git clone https://github.com/DeFliTeam/RF-Drone-Detection.git
+cd ./RF-Drone-Detection
+```
+
+**Step 2 Install Aircrack-Ng** 
+
+```bash
+sudo apt-get install aircrack-ng python3
+```
+
+**Step 3 Identify the WiFi Interface** 
+
+Here we need to indentify the wireless adapter interface. Run command 
+
+```bash
+iw dev
+```
+This will give a list of interfaces like below 
+
+```bash
+$ iw dev
+phy#0
+	Interface wlan0
+		ifindex 219
+		wdev 0x500000001
+		addr a0:f3:xx:xx:xx:xx
+		txpower 20.00 dBm
+phy#1
+	Interface wlan1
+		ifindex 180
+		wdev 0x1c
+		addr b8:08:xx:xx:xx:xx
+		type managed
+```
+
+You will want use the Interface wlan0 portion, not the phy#0. Note that in some distributions, the interface may be names differently (such as wlxa0f3c11e13c2, for example). This must be your interface card and not your home router. 
+
+**Step 4 Run Programme** 
+
+```bash
+cd ./src 
+sudo python3 ./wifi_monitor.py wlan1
+```
+In the above script we have used the interface name "wlan1" however when you enter this command you need to replace this with the name given to your interface. 
+
+Using passive Wi-Fi monitoring, you able to identify the presence of a drone by comparing the MAC address OUI prefix (the first 24 bits of a wireless card's MAC address) to a list of known drone manufacturers.
 
 
 ### Contributing
