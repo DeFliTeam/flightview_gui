@@ -298,17 +298,22 @@ You must have assigned the correct number to the RTL-SDR In step 4 Config File
 
 To perform this function you will need a wireless adapter, we recommend the Panda PAU09 USB Adapter 
 
-**Step 1 Clone Into Repository** 
+**Step 1 Install Python** 
 
 ```bash
-git clone https://github.com/DeFliTeam/RF-Drone-Detection.git
-cd ./RF-Drone-Detection
+sudo apt update
+sudo apt upgrade
+sudo apt install python2.7 python-pip
 ```
 
-**Step 2 Install Aircrack-Ng** 
+**Step 2 Clone Repository and install modules** 
 
 ```bash
-sudo apt-get install aircrack-ng python3
+git clone https://github.com/DeFliTeam/drone-detection.git
+cd drone-detection
+```
+```bash
+pip install -r requirements.txt
 ```
 
 **Step 3 Identify the WiFi Interface** 
@@ -340,13 +345,33 @@ You will want use the Interface wlan0 portion, not the phy#0. Note that in some 
 
 **Step 4 Run Programme** 
 
-```bash
-cd ./src 
-sudo python3 ./wifi_monitor.py wlan1
-```
-In the above script we have used the interface name "wlan1" however when you enter this command you need to replace this with the name given to your interface. 
+There are a number of options for running the drone detection 
 
-Using passive Wi-Fi monitoring, you able to identify the presence of a drone by comparing the MAC address OUI prefix (the first 24 bits of a wireless card's MAC address) to a list of known drone manufacturers.
+### Static 
+With this command you can scan for drones on a specific WiFi channel. 
+
+```bash
+sudo ./dronitor static wlan1 -c 1
+```
+First it changes the wireless network card to monitor mode and scans all the WiFi packets on channel 1. If it finds a MAC address with an OUI that is on the list an alert will appear. In this command wlan1 is the name of the wireless interface and -c indicates the channel to listen on. You can also use --channel for more verbosity. To exit press ctrl-c.
+
+### Hop 
+With this command you can scan for drones on all the WiFi channels 
+
+```bash
+sudo ./dronitor hop wlan1 -t 0.5 &
+```
+First it changes the wireless network card to monitor mode and then scans all the WiFi packets. It changes channel every 0.5 seconds and loops constantly through all the WiFi channels. If it finds a MAC address with an OUI that is on the list an alert will appear. In this command wlan1 is the name of the wireless interface that will be used and -t or --time is the time to wait before changing to the next channel. To exit press ctrl-c for a few seconds.
+
+### Managed 
+With this command you can change your wireless interface back to managed mode. 
+
+```bash
+sudo ./dronitor managed wlan1
+```
+Where wlan1 is the name of the wireless interface that will be changed to managed mode. Use this command when you've finished using the service. 
+
+
 
 
 ### Contributing
