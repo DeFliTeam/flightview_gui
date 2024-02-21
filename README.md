@@ -313,7 +313,7 @@ git clone https://github.com/DeFliTeam/drone-detection.git
 cd drone-detection
 ```
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 **Step 3 Identify the WiFi Interface** 
