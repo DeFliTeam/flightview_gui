@@ -43,6 +43,10 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 ```bash
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 ```
+### Install YAML (Rpi Only if you get error "no module found YAML") 
+```bash
+pip install PyYAML
+```
 
 ### Clone the Repository
 
@@ -375,7 +379,57 @@ With this command you can change your wireless interface back to managed mode.
 ```bash
 sudo ./dronitor managed wlan1
 ```
-Where wlan1 is the name of the wireless interface that will be changed to managed mode. Use this command when you've finished using the service. 
+Where wlan1 is the name of the wireless interface that will be changed to managed mode. Use this command when you've finished using the service.  
+
+### Screen Drivers 
+```bash
+sudo git clone https://github.com/osoyoo/HDMI-show.git
+sudo chmod -R 777 HDMI-show
+cd HDMI-show/
+sudo ./hdmi35-480x320-show
+reboot
+```
+### TigerVNC 
+Install TigerVNC to remotely manage your screen on the DeFli Device 
+
+SSH in to your DeFli Device or connect via HDMI to a monitor 
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install tigervnc-standalone-server
+```
+```bash
+sudo nano /etc/tigervnc/vncserver-config-mandatory
+```
+From there, you need to scroll down until you see “$localhost should the TigerVNC server only listen on localhost incoming VNC connections.” You need to delete “#” before $localhost = “no” so that it looks something like this: 
+
+```bash
+# $localhost should the TigerVNC server only listen on localhost for
+#            incoming VNC connections
+#
+# $localhost = "yes";
+$localhost = "no";
+```
+```bash
+sudo tigervncpasswd
+```
+And set the password (it needs to be at least 6 characters). When it asks you if you’d like to enter a view-only password, type n.
+
+Now you’ve set up the configurations for the TigerVNC server.
+
+Now you can run:
+
+```bash
+tigervncserver
+```
+And it’ll ask you for the password and then tell you the server port (typically something like 5901).
+
+
+So now let’s turn to your main computer. You’ll need to have the TigerVNC viewer downloaded on it in order to access the Raspberry Pi’s server.
+
+Open the TigerVNC server
+
+You need to type in the Raspberry Pi’s IP address followed by the port number, as you can see above. This will open the client and then you’re all set. You will be able to set the desktop functions for the mini-screen of your DeFli Device.
+
 
 
 
