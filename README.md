@@ -64,13 +64,17 @@ If you have already cloned the repository and want to update it, navigate to the
 ```bash
 git pull
 ```
+### Change Access Control (On Pi Only)
+```bash
+xhost +
+```
 ### Launch GUI (Linux)
 ```bash
   sudo python3 flightview_gui.py
 ```
 ### Launch GUI (RPi) 
 ```bash
-python flightview_gui.py
+sudo python flightview_gui.py
 ```
 
 ### Using the GUI
