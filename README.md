@@ -62,12 +62,19 @@ git clone https://github.com/alphafox02/flightview_gui.git
 If you have already cloned the repository and want to update it, navigate to the project directory and run the following command:
 
 ```bash
+cd flightview_gui/
 git pull
 ```
 ### Change Access Control (On Pi Only)
 ```bash
 xhost +
 ```
+### Install YAML (Rpi Only if you get error "no module found YAML") 
+```bash
+pip install PyYAML --break-system-packages
+
+```
+
 ### Launch GUI (Linux)
 ```bash
   sudo python3 flightview_gui.py
