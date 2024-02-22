@@ -63,9 +63,13 @@ If you have already cloned the repository and want to update it, navigate to the
 ```bash
 git pull
 ```
-### Launch GUI 
+### Launch GUI (Linux)
 ```bash
   sudo python3 flightview_gui.py
+```
+### Launch GUI (RPi) 
+```bash
+python flightview_gui.py
 ```
 
 ### Using the GUI
