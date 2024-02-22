@@ -38,6 +38,7 @@ sudo apt update
 ### Add Repo (RPi) 
 ```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
 ```
 ### Install Docker (Linux)
 ```bash
