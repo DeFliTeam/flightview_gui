@@ -49,11 +49,6 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 ```
 
-### Install YAML (Rpi Only if you get error "no module found YAML") 
-```bash
-pip install PyYAML --break-system-packages
-
-```
 
 ### Clone the Repository
 
