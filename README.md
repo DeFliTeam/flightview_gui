@@ -406,48 +406,42 @@ cd HDMI-show/
 sudo ./hdmi35-480x320-show
 reboot
 ```
-### TigerVNC 
-Install TigerVNC to remotely manage your screen on the DeFli Device 
+## Real VNC 
+Install Real VNC to remotely manage your mini screen on the DeFli Device 
 
-SSH in to your DeFli Device or connect via HDMI to a monitor 
-```bash
-sudo apt update && sudo apt upgrade
-sudo apt install tigervnc-standalone-server
+### Raspberry Pi 
+Real VNC is pre-installed on Raspberry Pi 
+
+1) Open Menu and choose security> Encryption = Prefer Off   Authentication = VNC_Password
+2) Users & Permissions > Select Standard User and create password.
+3) Restart the Pi
+
+### Linux 
+To download to Linux follow these additional steps and the use the steps outlined in "Raspberry Pi" 
+
+1) Navigate to https://www.realvnc.com/en/connect/download/combined/ and choose the linux version
+2) Extract the file and open
+3) Run the installer
+
+### On Host Device
+This is the device where you want to control your DeFli mini-screen from, assuming this is the Mini-PC within your DeFli Device 
+
+1) Navigate here https://www.realvnc.com/en/connect/download/viewer/linux/ and download the x64 Linux version
+then
+
+ ```bash
+cd /Downloads
+sudo apt install ./VNC-Viewer-7.10.0-Linux-x64.deb
 ```
-```bash
-sudo nano /etc/tigervnc/vncserver-config-mandatory
-```
-From there, you need to scroll down until you see “$localhost should the TigerVNC server only listen on localhost incoming VNC connections.” You need to delete “#” before $localhost = “no” so that it looks something like this: 
+2) Search for "VNC" in your application menu.
 
-```bash
-# $localhost should the TigerVNC server only listen on localhost for
-#            incoming VNC connections
-#
-# $localhost = "yes";
-$localhost = "no";
-```
-```bash
-sudo tigervncpasswd
-```
-And set the password (it needs to be at least 6 characters). When it asks you if you’d like to enter a view-only password, type n.
+### Starting a Session 
 
-Now you’ve set up the configurations for the TigerVNC server.
+1) Open VNC Viewer app
+2) Input Pi or mini-pc IP address (note you can find this on the Real VNC app on your target device (RPI or Mini-PC) and click connect
+3) Enter password created in "step 2" of the instructions and click connect
 
-Now you can run:
-
-```bash
-tigervncserver
-```
-And it’ll ask you for the password and then tell you the server port (typically something like 5901).
-
-
-So now let’s turn to your main computer. You’ll need to have the TigerVNC viewer downloaded on it in order to access the Raspberry Pi’s server.
-
-Open the TigerVNC server
-
-You need to type in the Raspberry Pi’s IP address followed by the port number, as you can see above. This will open the client and then you’re all set. You will be able to set the desktop functions for the mini-screen of your DeFli Device.
-
-
+You will now have a full screen on your local device that replicates the screen shown on your mini-screen in the DeFli Device. Use the browser function to input the URL of the map you wish to see.
 
 
 
