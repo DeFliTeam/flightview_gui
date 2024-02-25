@@ -84,6 +84,20 @@ pip install PyYAML --break-system-packages
 ```bash
 sudo python flightview_gui.py
 ```
+is: running it on RPi
+
+ubuntu@ubuntu:~/flightview_gui$ sudo python flightview_gui.py
+sudo: python: command not found
+ubuntu@ubuntu:~/flightview_gui$   sudo python3 flightview_gui.py
+Traceback (most recent call last):
+  File "/home/ubuntu/flightview_gui/flightview_gui.py", line 239, in <module>
+    window = tk.Tk()
+  File "/usr/lib/python3.10/tkinter/__init__.py", line 2299, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+_tkinter.TclError: no display name and no $DISPLAY environment variable
+
+Help pls
+
 
 ### Using the GUI
 
