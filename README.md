@@ -388,7 +388,7 @@ With this command you can scan for drones on all the WiFi channels
 ```bash
 sudo ./dronitor hop wlan1 -t 0.5 &
 ```
-First it changes the wireless network card to monitor mode and then scans all the WiFi packets. It changes channel every 0.5 seconds and loops constantly through all the WiFi channels. If it finds a MAC address with an OUI that is on the list an alert will appear. In this command wlan1 is the name of the wireless interface that will be used and -t or --time is the time to wait before changing to the next channel. To exit press ctrl-c for a few seconds.
+First it changes the wireless network card to monitor mode and then scans all the WiFi packets. It changes channel every 0.5 seconds and loops constantly through all the WiFi channels. If it finds a MAC address with an OUI that is on the list an alert will appear. In this command wlan1 is the name of the wireless interface that wil be used and -t or --time is the time to wait before changing to the next channel. To exit press ctrl-c for a few seconds.
 
 ### Managed 
 With this command you can change your wireless interface back to managed mode. 
@@ -397,6 +397,102 @@ With this command you can change your wireless interface back to managed mode.
 sudo ./dronitor managed wlan1
 ```
 Where wlan1 is the name of the wireless interface that will be changed to managed mode. Use this command when you've finished using the service.  
+
+## Camera Based Drone Detection 
+
+Note this will require this device added to your host board (including a DeFli Device). It uses any camera set as "default" within the board 
+
+### Clone Repository 
+
+```bash
+sudo git clone https://github.com/DeFliTeam/Camera-Aerial-Drone-Detection-System.git
+```
+### Install Python Libraries 
+
+```bash
+pip install opencv-python torch numpy pillow
+```
+### Download YoloV5 Model 
+
+### Download pre-trained weights 
+https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5n-seg.pt 
+
+Add the weights to the project directory by copying and pasting in to a folder named "weights.pt" 
+
+```bash
+sudo nano weights.pt
+```
+
+### Run 
+
+```bash
+python Advanced_Drone_Detection.py
+```
+
+The script will open a live video feed from the default camera.
+
+    To create a rectangle, click and drag the mouse on the video feed to define the four corners of the rectangle.
+    The rectangle can be adjusted by dragging the corners.
+    A warning message will be displayed whenever a drone is detected inside or near the rectangle.
+
+Press 'q' to quit the program.
+
+
+### Train 
+
+This is optional but if you would like to contribute to our training model 
+
+Use your laptop and the screenshot function to take images from the live video feed 
+
+Annotate these images with the following tags 
+
+"Drone" "Bird" "Aeroplane" "Helicopter" "Balloon" "Litter" 
+
+Save each image to your local computer 
+
+### Then use base64 encoding  
+
+```bash
+base64 filename > encoded_filename.txt
+
+e.g base64 img1.jpg > img1.txt
+```
+### Send the file to us using InfluxDB  
+
+```bash
+# influxdata-archive_compat.key GPG fingerprint:
+#     9D53 9D90 D332 8DC7 D6C8 D3B9 D8FF 8E1F 7DF8 B07E
+wget -q https://repos.influxdata.com/influxdata-archive_compat.key
+echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
+echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
+
+sudo apt-get update && sudo apt-get install influxdb2-cli
+```
+```bash
+influx
+```
+
+```bash
+influx write \
+  -b bucketName \
+  -o orgName \
+  -a API Token
+  -p s \
+  --format=lp
+  -f /path/to/line-protocol.txt
+```
+Example 
+```bash
+influx write \
+  -b Test1 \       (obtain this from @OreoMCL on our discord server)
+  -o DEFliData \
+  -a API Token     (obtain this from @OreoMCL on our discord server)
+  -p s \
+  --format=lp
+  -f /path/to/img1.txt
+```
+
+
 
 ### Screen Drivers 
 ```bash
