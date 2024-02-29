@@ -70,14 +70,16 @@ git pull
 ```bash
 xhost +
 ```
-### Install YAML (Rpi Only if you get error "no module found YAML") 
+
+### Install YAML 
 ```bash
-pip install PyYAML --break-system-packages
+sudo python -m pip install pyyaml
 
 ```
 
 ### Launch GUI (Linux)
 ```bash
+cd flightview_gui/
   sudo python3 flightview_gui.py
 ```
 ### Launch GUI (RPi) 
