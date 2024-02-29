@@ -165,15 +165,20 @@ API is available at http://localhost:49155
 **Step 2- Install Radar** 
 
 ```bash
-vim docker-compose.yml
---- build: .
-+++ image: ghcr.io/30hours/blah2:latest
-sudo docker compose up -d
+sudo git clone http://github.com/30hours/blah2 /opt/blah2
+cd /opt/blah2
+./lib/sdrplay-3.14.0/SDRplay_RSP_API-Linux-3.14.0.run --tar -xvf -C ./lib/sdrplay-3.14.0
+./lib/sdrplay-3.14.0/install_lib.sh
+sudo docker network create blah2
+sudo systemctl enable docker
+sudo docker compose up -d --build
 ```
 Adjusting the docker file: 
 
 ```bash
+cd /opt/blah2
 sudo nano config/config.yml
+
 ```
 In the section titled "truth" change the following: 
 TAR1090- Change to the location of your aircraft.json file 
