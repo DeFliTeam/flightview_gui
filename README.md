@@ -66,11 +66,6 @@ If you have already cloned the repository and want to update it, navigate to the
 cd flightview_gui/
 git pull
 ```
-### Change Access Control (On Pi Only)
-```bash
-export DISPLAY=:0
-xhost +
-```
 
 ### Install YAML 
 ```bash
@@ -85,7 +80,7 @@ cd flightview_gui/
 ```
 ### Launch GUI (RPi) 
 ```bash
-sudo python flightview_gui.py
+sudo DISPLAY=:0 python flightview_gui.py
 ```
 
 ### Using the GUI
