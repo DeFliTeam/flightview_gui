@@ -1,4 +1,23 @@
-# Installation Procedures for DeFli Projects 
+# Installation Procedures for DeFli Projects  
+
+The following commands and installation procedures are built for Ubuntu and Raspbian, to run these on a windows PC or a mobile device (android) please install Ubuntu using the following methods 
+
+### Windows
+
+Open a powershell (terminal) as an administrator 
+
+```bash
+wsl --install Ubuntu
+```
+Reboot your windows system 
+
+Search for "Ubuntu" within your programs, click to open the Ubuntu CLI. 
+
+### Android 
+
+You need to download the app called "Andronix"- Linux on Android https://play.google.com/store/apps/details?id=studio.com.techriz.andronix&hl=en&gl=US&pli=1 
+
+Once downloaded you can run an Ubuntu terminal.
 
 
 
@@ -6,7 +25,7 @@
 
 ### Prerequisites
 
-- A Linux system either Linux computer, DragonOS or Pi running Ubuntu
+- A Linux system either Linux computer, DragonOS or Pi running Ubuntu (for Windows and Mobile Users please see the relevant sections above)
 - Docker Compose
 - Docker installed
 - Git (for cloning the repository)
