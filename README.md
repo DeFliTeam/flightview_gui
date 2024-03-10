@@ -167,6 +167,10 @@ Run this script
 sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
 ```
 
+## Dashboard Creator 
+
+Please follow https://github.com/DeFliTeam/dump1090-exporter/blob/master/README.md
+
 
 ## Passive Radar
  
