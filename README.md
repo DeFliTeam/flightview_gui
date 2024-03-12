@@ -157,7 +157,7 @@ If you encounter issues accessing the web interfaces, check your firewall settin
 Enjoy using the FlightView GUI to effortlessly manage and monitor your aircraft services. If you have any questions or encounter issues, please feel free to open an issue in this repository.
 
 
-## Data Connector 
+## Data Connector ADSB
 
 If you are running a self-build device your Bucket ID and API Key will be provided in your defli-wallet. If you have a DeFli Device your Bucket ID and API Key can be found on the underneath of the device. 
 
@@ -166,6 +166,105 @@ Run this script
 ```bash
 sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInfluxDB/master/installInflux.sh)"
 ```
+
+## Data Connector ACARS 
+
+JSON Import flow for Node-Red 
+[
+    {
+        "id": "d1f8bd6859c9d24e",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "81aadf2ac213637d",
+        "type": "udp in",
+        "z": "d1f8bd6859c9d24e",
+        "name": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "cc62540ca8a83050",
+                "2bdc1b694209870d"
+            ]
+        ]
+    },
+    {
+        "id": "cc62540ca8a83050",
+        "type": "json",
+        "z": "d1f8bd6859c9d24e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "86904c8ef1b83a33",
+                "08d2b94cf0b36af5"
+            ]
+        ]
+    },
+    {
+        "id": "86904c8ef1b83a33",
+        "type": "influxdb in",
+        "z": "d1f8bd6859c9d24e",
+        "name": "",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 780,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2bdc1b694209870d",
+        "type": "debug",
+        "z": "d1f8bd6859c9d24e",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "08d2b94cf0b36af5",
+        "type": "debug",
+        "z": "d1f8bd6859c9d24e",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 460,
+        "wires": []
+    }
+]
 
 ## Dashboard Creator 
 
