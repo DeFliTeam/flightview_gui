@@ -170,6 +170,7 @@ sudo bash -c "$(wget -O - https://raw.githubusercontent.com/dealcracker/DefliInf
 ## Data Connector ACARS 
 
 JSON Import flow for Node-Red 
+```bash
 [
     {
         "id": "d1f8bd6859c9d24e",
@@ -265,6 +266,7 @@ JSON Import flow for Node-Red
         "wires": []
     }
 ]
+```
 
 ## Dashboard Creator 
 
