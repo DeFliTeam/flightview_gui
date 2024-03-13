@@ -270,7 +270,7 @@ JSON Import flow for Node-Red
 
 ## Dashboard Creator 
 
-Please follow https://github.com/DeFliTeam/dump1090-exporter/blob/master/README.md
+Please follow https://github.com/DeFliTeam/Grafana-Dashboard
 
 
 ## Passive Radar
