@@ -29,7 +29,7 @@ usbipd bind --busid 4-4
 
  Close the windows terminal and open a new one without administrator function. 
 
- Run command below using your BUSID in-place of the "4-4" 
+ Run command below using your BUSID in-place of the "4-4". You will get an output that identifies the IP address for use, note this down.
 
  ```bash
 usbipd attach --wsl --busid 4-4
@@ -40,7 +40,8 @@ Search for "Ubuntu" within your programs, click to open the Ubuntu CLI.
 Run command to check the RTL-SDR is attached 
 
 ```bash
-lsusb```
+lsusb
+```
 
 ### Android 
 
