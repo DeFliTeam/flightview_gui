@@ -2,16 +2,45 @@
 
 The following commands and installation procedures are built for Ubuntu and Raspbian, to run these on a windows PC or a mobile device (android) please install Ubuntu using the following methods 
 
-### Windows
+### Windows (Including DEFLI DEVICE)
 
 Open a powershell (terminal) as an administrator 
 
 ```bash
-wsl --install Ubuntu
+wsl --install 
 ```
 Reboot your windows system 
 
-Search for "Ubuntu" within your programs, click to open the Ubuntu CLI. 
+Download and run this package https://github.com/dorssel/usbipd-win/releases/download/v4.1.0/usbipd-win_4.1.0.msi 
+
+Open a windows command prompt as an administrator 
+
+Run command 
+
+```bash
+usbipd list
+```
+
+Determine the BUS ID of your dongle's from the output and use it in the below command by replacing the "4-4" with your BUSID
+
+```bash
+usbipd bind --busid 4-4
+```
+
+ Close the windows terminal and open a new one without administrator function. 
+
+ Run command below using your BUSID in-place of the "4-4" 
+
+ ```bash
+usbipd attach --wsl --busid 4-4
+```
+
+Search for "Ubuntu" within your programs, click to open the Ubuntu CLI.  
+
+Run command to check the RTL-SDR is attached 
+
+```bash
+lsusb```
 
 ### Android 
 
