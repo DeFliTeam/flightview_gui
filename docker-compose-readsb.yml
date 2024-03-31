@@ -16,13 +16,16 @@ services:
     - READSB_RX_LOCATION_ACCURACY=2
     - READSB_STATS_RANGE=true
     - READSB_NET_ENABLE=true
+    - PROMETHEUS_ENABLE=true
+    - TAR1090_ENABLE_AC_DB=true
     # Uncomment the below line to have dump978 make it into the tar1090 interface
     #- READSB_NET_CONNECTOR=172.17.0.1,37982,beast_in
     hostname: readsb
-    image: ghcr.io/sdr-enthusiasts/docker-readsb-protobuf:latest
+    image: ghcr.io/sdr-enthusiasts/docker-readsb-protobuf:telegraf
     ports:
     - 8080:8080
     - 30005:30005
+    - 9273-9274:9273-9274
     restart: unless-stopped
     tmpfs:
     - /run/readsb:size=64M
